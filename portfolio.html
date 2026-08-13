@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Raiyan Khan.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0d;
+    --bg-alt:#111113;
+    --ink:#ece8df;
+    --ink-dim:#8c887f;
+    --ink-faint:#55534d;
+    --brass:#c39a5f;
+    --brass-soft:rgba(195,154,95,0.35);
+    --line:rgba(236,232,223,0.10);
+    --serif:'Fraunces', serif;
+    --mono:'IBM Plex Mono', monospace;
+    --sans:'Inter', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{background:var(--brass-soft);color:var(--ink);}
+
+  a{color:inherit;text-decoration:none;}
+
+  .noise{
+    position:fixed;inset:0;pointer-events:none;z-index:2;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .container{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:20;
+    padding:28px 32px;
+    display:flex;justify-content:space-between;align-items:center;
+    mix-blend-mode:difference;
+  }
+  .brand{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.03em;
+    color:var(--ink);
+  }
+  nav{display:flex;gap:28px;}
+  nav a{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-dim);
+    letter-spacing:0.02em;
+    transition:color .3s ease;
+    position:relative;
+  }
+  nav a:hover{color:var(--brass);}
+
+  /* ---------- EYEBROW LABEL ---------- */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--brass);
+    letter-spacing:0.04em;
+    display:inline-block;
+    margin-bottom:22px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    padding-top:80px;
+  }
+
+  .eq{
+    position:absolute;
+    right:32px;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:flex-end;
+    gap:5px;
+    height:120px;
+    opacity:0.85;
+  }
+  .eq span{
+    width:3px;
+    background:linear-gradient(to top, var(--brass), transparent 130%);
+    border-radius:2px;
+    animation:eqmove 1.6s ease-in-out infinite;
+  }
+  @keyframes eqmove{
+    0%,100%{height:14px;}
+    50%{height:var(--h,60px);}
+  }
+
+  .hero-name{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(52px, 9vw, 108px);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .hero-name em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--ink-dim);
+  }
+
+  .hero-tagline{
+    font-family:var(--mono);
+    font-size:clamp(15px, 2vw, 19px);
+    color:var(--brass);
+    margin-top:22px;
+    letter-spacing:0.01em;
+  }
+  .cursor{
+    display:inline-block;
+    width:9px;height:1em;
+    background:var(--brass);
+    margin-left:2px;
+    animation:blink 1s step-end infinite;
+    vertical-align:text-bottom;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero-sub{
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:16px;
+    line-height:1.7;
+    color:var(--ink-dim);
+    max-width:480px;
+    margin-top:28px;
+  }
+
+  .hero-meta{
+    display:flex;
+    gap:36px;
+    margin-top:52px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+  .hero-meta div span{
+    display:block;color:var(--ink);font-size:13px;margin-top:6px;
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:40px;left:32px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-faint);
+    display:flex;align-items:center;gap:10px;
+  }
+  .scroll-cue .bar{
+    width:1px;height:36px;
+    background:linear-gradient(to bottom, var(--brass), transparent);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    padding:130px 0;
+    border-top:1px solid var(--line);
+    position:relative;
+  }
+
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:56px;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .section-title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(30px,4vw,42px);
+    letter-spacing:-0.01em;
+  }
+  .section-num{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:60px;
+  }
+  .about-text p{
+    font-size:18px;
+    line-height:1.85;
+    color:var(--ink);
+    font-weight:300;
+  }
+  .about-text p + p{margin-top:30px;color:var(--ink-dim);font-size:16px;}
+
+  .about-card{
+    border:1px solid var(--line);
+    background:var(--bg-alt);
+    padding:28px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-dim);
+    height:fit-content;
+  }
+  .about-card .row{
+    display:flex;justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .about-card .row:last-child{border-bottom:none;}
+  .about-card .row b{color:var(--ink);font-weight:400;}
+
+  /* ---------- STACK / SKILLS ---------- */
+  .stack-groups{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px;
+  }
+  .stack-group h4{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--brass);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:22px;
+    font-weight:400;
+  }
+  .channel{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .channel:last-child{border-bottom:none;}
+  .channel-name{
+    font-family:var(--sans);
+    font-size:14.5px;
+    color:var(--ink);
+    flex:1;
+  }
+  .channel-wave{
+    display:flex;
+    align-items:flex-end;
+    gap:2.5px;
+    height:16px;
+  }
+  .channel-wave span{
+    width:2.5px;
+    background:var(--brass);
+    opacity:0.75;
+    border-radius:1px;
+    animation:eqmove2 1.4s ease-in-out infinite;
+  }
+  @keyframes eqmove2{
+    0%,100%{height:3px;}
+    50%{height:var(--h,12px);}
+  }
+
+ /* ---------- PROJECT ---------- */
+.project-card{
+  border:1px solid var(--line);
+  background:var(--bg-alt);
+  padding:48px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Gap between projects */
+.project-card + .project-card{
+  margin-top:24px;
+}
+
+.project-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:3px;
+  height:100%;
+  background:var(--brass);
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--brass);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.status .dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#1B7A1C;
+  animation:pulse 1.6s ease-in-out infinite;
+}
+
+/* Waiting / Coming Soon */
+
+.status.waiting .dot{
+  background:#FFD000;
+  animation:pulse-yellow 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-yellow{
+  0%,100%{
+    opacity:0.4;
+  }
+  50%{
+    opacity:1;
+  }
+}
+
+.project-title{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:clamp(24px,3vw,32px);
+  max-width:560px;
+  line-height:1.25;
+  margin-bottom:16px;
+}
+
+.project-desc{
+  color:var(--ink-dim);
+  font-size:15.5px;
+  line-height:1.75;
+  max-width:520px;
+  margin-bottom:26px;
+}
+
+.project-stack{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:34px;
+}
+
+.tag{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-dim);
+  border:1px solid var(--line);
+  padding:6px 12px;
+  border-radius:2px;
+}
+
+.project-links{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  font-family:var(--mono);
+  font-size:12.5px;
+  padding:13px 22px;
+  border:1px solid var(--brass-soft);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  transition:all .3s ease;
+  letter-spacing:0.02em;
+}
+
+.btn.primary{
+  background:var(--brass);
+  color:var(--bg);
+  border-color:var(--brass);
+}
+
+.btn.primary:hover{
+  background:transparent;
+  color:var(--brass);
+}
+
+.btn.ghost{
+  color:var(--ink-dim);
+}
+
+.btn.ghost:hover{
+  color:var(--ink);
+  border-color:var(--ink-dim);
+}
+  /* ---------- CONNECT ---------- */
+  .connect-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .connect-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+    font-family:var(--mono);
+    transition:padding-left .3s ease;
+  }
+  .connect-row:hover{padding-left:12px;}
+  .connect-row .cmd{color:var(--ink-faint);font-size:13px;}
+  .connect-row .cmd b{color:var(--brass);font-weight:400;}
+  .connect-row .val{
+    font-size:16px;
+    color:var(--ink);
+  }
+  .connect-row:hover .val{color:var(--brass);}
+  .connect-row .arrow{color:var(--ink-faint);font-size:14px;}
+
+  footer{
+    padding:36px 0 50px;
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-faint);
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;}
+    .stack-groups{grid-template-columns:1fr;gap:34px;}
+    .eq{display:none;}
+    nav{gap:16px;}
+    .project-card{padding:30px 24px;}
+    section{padding:90px 0;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+
+<header>
+  <div class="brand">RK / 01</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#stack">Stack</a>
+    <a href="#work">Work</a>
+    <a href="#connect">Connect</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none;padding-top:80px;">
+    <div class="eq" id="heroEq"></div>
+    <span class="eyebrow reveal in">{ portfolio }</span>
+    <h1 class="hero-name reveal in">Raiyan<br><em>Khan.</em></h1>
+    <p class="hero-tagline reveal in">I Vibe and Code.<span class="cursor"></span></p>
+    <p class="hero-sub reveal in">Third-year Computer Science student at Reva University. Decent at most things. Code's the one I don't walk away from.</p>
+
+    <div class="hero-meta reveal in">
+      <div>Based<span>India</span></div>
+      <div>Studying<span>CS, REVA University.</span></div>
+      <div>Status<span>Sleeping.</span></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="margin:0;">{ About }</span>
+      <span class="section-num">01</span>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>I'm decent at a lot of things. Code isn't where I started strongest but it's where I decided to stay anyway.</p>
+        <p>Just a habit of not leaving something broken until it isn't.</p>
+      </div>
+      <div class="about-card">
+        <div class="row"><span>Year</span><b>3rd Year</b></div>
+        <div class="row"><span>Institution</span><b>Reva University</b></div>
+        <div class="row"><span>Focus</span><b>Unavailable</b></div>
+        <div class="row"><span>Approach</span><b>Figure it out, ship it</b></div>
+        <div class="row"><span>Superpower</span><b>a bug</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="margin:0;">{ Stack }</span>
+      <span class="section-num">02</span>
+    </div>
+    <div class="stack-groups reveal">
+      <div class="stack-group">
+        <h4>Languages</h4>
+        <div class="channel"><span class="channel-name">JavaScript</span><span class="channel-wave"></span></div>
+        <div class="channel"><span class="channel-name">Python</span><span class="channel-wave"></span></div>
+        <div class="channel"><span class="channel-name">SQL</span><span class="channel-wave"></span></div>
+      </div>
+      <div class="stack-group">
+        <h4>Frontend</h4>
+        <div class="channel"><span class="channel-name">React</span><span class="channel-wave"></span></div>
+        <div class="channel"><span class="channel-name">HTML</span><span class="channel-wave"></span></div>
+        <div class="channel"><span class="channel-name">CSS</span><span class="channel-wave"></span></div>
+      </div>
+      <div class="stack-group">
+        <h4>Tooling</h4>
+        <div class="channel"><span class="channel-name">Git</span><span class="channel-wave"></span></div>
+        <div class="channel"><span class="channel-name">GitHub</span><span class="channel-wave"></span></div>
+        <div class="channel"><span class="channel-name">Vercel</span><span class="channel-wave"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="margin:0;">{ Live }</span>
+      <span class="section-num">03</span>
+    </div>
+    <div class="project-card reveal">
+      <div class="status"><span class="dot"></span>Live in production</div>
+      <div class="project-title">SobiaBuildtech &amp; interior solutions company</div>
+      <p class="project-desc">Built and shipped end-to-end for a client in the construction and interior design space — no shortcuts, no hand-holding. It's out there now, holding up as their front door on the web.</p>
+      <div class="project-stack">
+        <span class="tag">React</span>
+        <span class="tag">Tailwind CSS</span>
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">Vercel</span>
+      </div>
+      <div class="project-links">
+        <a href="https://sobiabuildtech.vercel.app/" class="btn primary">↗ View Live Site</a>
+      </div>
+    </div>
+
+<div class="project-card reveal">
+  <div class="status" style="color:var(--brass);">
+  <span class="dot" style="background:#FFE600 !important;"></span>
+  Coming soon...
+</div>
+
+  <div class="project-title">
+    Alayean Overseas &amp; Premium Agro Commodities · From Soil to Shore
+  </div>
+
+  <p class="project-desc">
+    Built and shipped end-to-end for a client in the construction and interior design space — no shortcuts, no hand-holding. It's out there now, holding up as their front door on the web.
+  </p>
+
+  <div class="project-stack">
+    <span class="tag">HTML5</span>
+    <span class="tag">CSS3</span>
+    <span class="tag">JavaScript</span>
+    <span class="tag">GitHub</span>
+  </div>
+
+  <div class="project-links">
+    <a href="#" class="btn primary">↗ Coming Soon</a>
+  </div>
+  </section>
+
+  <!-- CONNECT -->
+  <section id="connect">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="margin:0;">{ Connect }</span>
+      <span class="section-num">04</span>
+    </div>
+    <div class="connect-list reveal">
+      <a class="connect-row" href="mailto:raiyank721@gmail.com">
+        <span class="cmd"><b>mail</b> --send</span>
+        <span class="val">raiyank721@gmail.com</span>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="connect-row" href="https://github.com/raiyankhan15" target="_blank" rel="noopener">
+        <span class="cmd"><b>open</b> github</span>
+        <span class="val">github.com/raiyankhan15</span>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="connect-row" href="https://linkedin.com/in/raiyankhan15" target="_blank" rel="noopener">
+        <span class="cmd"><b>open</b> linkedin</span>
+        <span class="val">linkedin.com/in/raiyankhan15</span>
+        <span class="arrow">↗</span>
+      </a>
+    </div>
+
+    <footer>
+      <span>© 2026 Raiyan Khan</span>
+      <span>Designed &amp; built with { love }</span>
+    </footer>
+  </section>
+
+</div>
+
+<script>
+  // hero equalizer bars
+  const heroEq = document.getElementById('heroEq');
+  for(let i=0;i<14;i++){
+    const bar = document.createElement('span');
+    const h = 30 + Math.random()*90;
+    bar.style.setProperty('--h', h+'px');
+    bar.style.animationDelay = (Math.random()*1.2)+'s';
+    bar.style.animationDuration = (1.1+Math.random()*1)+'s';
+    heroEq.appendChild(bar);
+  }
+
+  // channel micro-waveforms
+  document.querySelectorAll('.channel-wave').forEach(wave=>{
+    const bars = 4;
+    for(let i=0;i<bars;i++){
+      const s = document.createElement('span');
+      const h = 8 + Math.random()*10;
+      s.style.setProperty('--h', h+'px');
+      s.style.animationDelay = (Math.random()*1)+'s';
+      wave.appendChild(s);
+    }
+  });
+
+  // scroll reveal
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); }
+    });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
